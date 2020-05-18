@@ -66,7 +66,7 @@ int main(void) {
 		}
 
 		printf("You have guessed correctly!\n");
-		
+
 		if (i < 4) {
 			int another = anotherGame();
 			if (!another) {
@@ -77,7 +77,7 @@ int main(void) {
 	return 0;
 }
 
-	
+
 
 
 
