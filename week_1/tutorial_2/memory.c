@@ -1,6 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
+# include <assert.h>
 
 char *createCommand(size_t size) {
   char *ptr = (char*) calloc(size, sizeof(char));
@@ -31,12 +31,16 @@ char **getCommands(int n, size_t size) {
 }
 
 void printCommands(char **commands, int n) {
+  assert((commands != NULL) && "Pointer cannot be null.");
+  
   for (int i = 0; i < n; i++) {
     printf("%s\n", commands[i]);
   }
 }
 
 void freeCommands(char **commands, int n) {
+  assert((commands != NULL) && "Pointer cannot be null.");
+  
   for (int i = 0; i < n; i++) {
     free(commands[i]);
   }
