@@ -2,6 +2,9 @@
 #include <ctype.h>
 #include <string.h>
 
+#define CODE_LENGTH 4
+#define NUM_GAMES 5
+
 int anotherGame(void) {
 	char answer;
 
@@ -27,9 +30,9 @@ void readGuess(int *guess) {
 
 }
 
-int blackScore(int guess[4], int code[4]){
-	int score = 0;
-	for (int i = 0; i < 4; i++) {
+int blackScore(int guess[CODE_LENGTH], int code[CODE_LENGTH]){
+  int score = 0;
+	for (int i = 0; i < CODE_LENGTH; i++) {
 		if (code[i] == guess[i]){
 			score++;
 		}
@@ -38,10 +41,10 @@ int blackScore(int guess[4], int code[4]){
 	return score;
 }
 
-int whiteScore(int guess[4], int code[4]) {
+int whiteScore(int guess[CODE_LENGTH], int code[CODE_LENGTH]) {
 	int score = 0;
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int i = 0; i < CODE_LENGTH; i++) {
+		for (int j = 0; j < CODE_LENGTH; j++) {
 			if (i != j && code[i] == guess[j]) {
 				score++;
 			}
@@ -50,24 +53,24 @@ int whiteScore(int guess[4], int code[4]) {
 	return score;
 }
 
-void printScore(int g[4], int c[4]) {
+void printScore(int g[CODE_LENGTH], int c[CODE_LENGTH]) {
 	printf("(%d,%d)\n", blackScore(g, c), whiteScore(g, c));
 }
 
 int main(void) {
-	int codes[5][4] = {{1, 8, 9, 2}, {2, 4, 6, 8}, {1, 9, 8, 3}, {7, 4, 2, 1}, {4, 6, 8, 9}};
+	int codes[NUM_GAMES][CODE_LENGTH] = {{1, 8, 9, 2}, {2, 4, 6, 8}, {1, 9, 8, 3}, {7, 4, 2, 1}, {4, 6, 8, 9}};
 
-	for (int i = 0; i < 4; i++) {
-		int guess[4];
+	for (int i = 0; i < NUM_GAMES; i++) {
+		int guess[CODE_LENGTH];
 
-		while (blackScore(guess, codes[i]) != 4) {
+		while (blackScore(guess, codes[i]) != CODE_LENGTH) {
 			readGuess(guess);
 			printScore(guess, codes[i]);
 		}
 
 		printf("You have guessed correctly!\n");
 
-		if (i < 4) {
+		if (i < NUM_GAMES - 1) {
 			int another = anotherGame();
 			if (!another) {
 				break;
